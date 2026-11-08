@@ -1,0 +1,104 @@
+:root {
+  color-scheme: dark;
+  --night: #11131c;
+  --paper: #f7f1e5;
+  --secondary: #c9c6c7;
+  --gold: #ecd3a5;
+  --hairline: #383a43;
+  --gutter: clamp(1.25rem, 6vw, 6.25rem);
+  font: 100%/1.65 Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--paper); background: var(--night); }
+h1, h2, h3, .brand { font-family: Baskervville, Georgia, "Times New Roman", serif; font-weight: 400; }
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+a { color: inherit; text-underline-offset: .25em; }
+a:hover, summary:hover { color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+img, video { display: block; max-width: 100%; height: auto; }
+section[id] { scroll-margin-top: 1.5rem; }
+.skip-link { position: absolute; top: .5rem; left: 1rem; z-index: 3; transform: translateY(-160%); padding: .5em 1em; color: var(--night); background: var(--paper); }
+.skip-link:focus { transform: none; }
+
+.site-header, .site-footer, .inner {
+  max-width: 108rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.site-header, .site-footer { display: flex; align-items: center; gap: 1.5rem; }
+.site-header { justify-content: space-between; min-height: 4.75rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.15; letter-spacing: -.025em; text-decoration: none; }
+.brand::before { content: ""; display: block; height: .85rem; width: 1.15rem; flex: none; border: 1px solid var(--gold); border-radius: 50%; transform: rotate(-28deg); box-shadow: inset 0 -.18rem 0 var(--gold); }
+nav { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem); }
+nav a, .site-footer > a:not(.brand), summary { font-size: .94rem; }
+nav a { display: inline-block; padding-block: .5rem; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+
+.hero {
+  display: grid;
+  isolation: isolate;
+  align-items: end;
+  min-height: clamp(29rem, 42vw, 41rem);
+  max-width: 120rem;
+  position: relative;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #151520;
+}
+.hero-image, .hero::after { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; }
+.hero-image { object-fit: cover; object-position: center 43%; }
+.hero::after { content: ""; background: linear-gradient(90deg, rgb(12 13 22 / .92), rgb(16 16 23 / .63) 41%, transparent 75%), linear-gradient(0deg, rgb(15 16 23 / .5), transparent 55%); }
+.hero-content { width: 100%; max-width: 108rem; margin-inline: auto; padding: 3.6rem var(--gutter) clamp(3rem, 5.4vw, 6rem); }
+.eyebrow { color: var(--gold); font-weight: 600; font-size: .76rem; line-height: 1.5; letter-spacing: .17em; text-transform: uppercase; }
+.hero h1 { margin: .12em 0 .17em -.035em; font-size: clamp(4.3rem, 9.8vw, 10rem); letter-spacing: -.07em; line-height: .98; }
+.intro { max-width: 31rem; color: #e7e3de; font-size: clamp(1rem, 1.3vw, 1.23rem); line-height: 1.6; }
+.film-link { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.6rem; padding: .66rem 1.12rem; line-height: 1.5; border-radius: .22rem; background: var(--paper); color: #1d202a; font-weight: 600; text-decoration: none; }
+.film-link:hover { background: var(--gold); color: var(--night); }
+.play { width: 0; height: 0; border: .32rem solid transparent; border-right: 0; border-left: .5rem solid currentColor; }
+
+.places, .trailer { padding-block: clamp(3.2rem, 6vw, 6rem); }
+.inner h2, .policy h1 { font-size: clamp(2.25rem, 4.25vw, 4rem); line-height: 1.1; letter-spacing: -.045em; }
+.scene-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.15rem, 2.5vw, 2.5rem); margin-top: clamp(1.65rem, 3.25vw, 3rem); }
+.scene-grid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #242330; }
+.scene-grid figcaption { padding-top: .95rem; }
+.scene-grid h3 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); line-height: 1.15; letter-spacing: -.035em; }
+.scene-grid p, .film-description > p:last-child { margin-top: .45rem; max-width: 37ch; color: var(--secondary); }
+.trailer { display: grid; grid-template-columns: minmax(12rem, .58fr) minmax(0, 1.35fr); align-items: center; gap: clamp(2rem, 5vw, 6rem); border-top: 1px solid var(--hairline); }
+.film-description h2 { margin-block: .32em; }
+.trailer video { width: 100%; border-radius: .2rem; background: #07080e; }
+
+.site-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 2rem; border-top: 1px solid var(--hairline); }
+.site-footer > a:not(.brand) { margin-left: auto; }
+.credits { flex-basis: 100%; max-width: 56rem; color: var(--secondary); }
+summary { width: fit-content; color: var(--secondary); cursor: pointer; }
+.credits p { margin-top: .6rem; font-size: .9rem; }
+.policy { max-width: 48rem; margin-inline: auto; padding: clamp(3rem, 6.5vw, 6rem) var(--gutter); box-sizing: content-box; }
+.policy h1 { margin-bottom: .45em; }
+.policy h2 { margin: 1.45em 0 .3em; font-size: clamp(1.55rem, 2.9vw, 2.1rem); letter-spacing: -.02em; line-height: 1.2; }
+.policy h3 { margin: 1.2em 0 .25em; font-size: 1.4rem; }
+.policy p, .policy li { max-width: 68ch; color: var(--secondary); }
+.policy p + p { margin-top: 1em; }
+.policy li + li { margin-top: .35em; }
+.policy ul { padding-left: 1.3em; }
+.policy a { color: var(--gold); overflow-wrap: anywhere; }
+.policy .eyebrow { color: var(--gold); margin-bottom: 1em; }
+
+@media (max-width: 45rem) {
+  .site-header { min-height: 4.2rem; }
+  .hero { min-height: 29rem; }
+  .hero-image { object-position: 60% 38%; }
+  .hero::after { background: linear-gradient(0deg, rgb(12 13 21 / .96), rgb(15 16 23 / .64) 48%, transparent); }
+  .hero-content { padding-block: 9rem 2.75rem; }
+  .scene-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .scene-grid p { max-width: unset; }
+  .trailer { grid-template-columns: 1fr; gap: 1.5rem; }
+  .site-footer { align-items: baseline; }
+  .site-footer > a:not(.brand) { margin-left: 0; }
+}
+@media (max-width: 25rem) {
+  .site-header { gap: .5rem; }
+  .site-header nav { gap: .75rem; }
+  .brand { gap: .4rem; }
+}

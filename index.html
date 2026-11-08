@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131c">
+  <meta name="description" content="Biemann Worldworks presents Velvet Sky. Explore a real star map from desert dunes, a quiet beach, or a jungle canopy on Meta Quest.">
+  <title>Biemann Worldworks | Velvet Sky</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./">Biemann Worldworks</a>
+    <nav aria-label="Main navigation"><a href="#places">Scenery</a><a href="./privacy/">Privacy</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="game-title">
+      <img class="hero-image" src="./assets/sky.webp" width="1700" height="956" alt="The galactic core and constellations as seen in Velvet Sky." fetchpriority="high">
+      <div class="hero-content">
+        <p class="eyebrow">Coming soon to Meta Quest</p>
+        <h1 id="game-title">Velvet Sky</h1>
+        <p class="intro">Settle into bed beneath the stars. Choose a spot in the dunes, by the sea or high in the treetops. The sky follows your observing location and time.</p>
+        <a class="film-link" href="#trailer"><span class="play" aria-hidden="true"></span>Watch the trailer</a>
+      </div>
+    </section>
+    <section id="places" class="places inner" aria-labelledby="places-title">
+      <h2 id="places-title">Where would you like to stargaze?</h2>
+      <div class="scene-grid">
+        <figure>
+          <img src="./assets/dunes.webp" width="800" height="450" alt="Rose-colored dunes rise beyond a soft blanket, with tiny colored lights along the ridges." loading="lazy">
+          <figcaption><h3>Desert Dunes</h3><p>Watch little lights catch the wind and roll over the sand.</p></figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/beach.webp" width="800" height="450" alt="Patches of turquoise light glow in the waves at the edge of the island." loading="lazy">
+          <figcaption><h3>Beach</h3><p>Listen to the surf. Every so often, the water around the island glows blue.</p></figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/canopy.webp" width="800" height="450" alt="Water flows over two dark rock ledges into a luminous pool among the treetops." loading="lazy">
+          <figcaption><h3>Jungle Canopy</h3><p>Rest in a gently swaying tree overlooking a waterfall and its fireflies.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="trailer" class="trailer inner" aria-labelledby="trailer-title">
+      <div class="film-description"><p class="eyebrow">Captured in VR</p><h2 id="trailer-title">Velvet Sky trailer</h2><p>Thirty seconds in the dunes, on the beach and in the canopy.</p></div>
+      <video width="1920" height="1080" controls playsinline preload="none" poster="./assets/film.webp" aria-label="Velvet Sky trailer showing all three environments">
+        <source src="./assets/velvet-sky.mp4" type="video/mp4">
+        <a href="./assets/velvet-sky.mp4">Open the trailer</a>
+      </video>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="brand" href="./">Biemann Worldworks</a>
+    <a href="./privacy/">Velvet Sky privacy policy</a>
+    <a href="mailto:alexbiemannandroidapps@gmail.com">Email support</a>
+    <details class="credits"><summary>Sky imagery credits</summary>
+      <p>Milky Way background adapted from <a href="https://svs.gsfc.nasa.gov/4851/">Deep Star Maps 2020</a> by the NASA/Goddard Space Flight Center Scientific Visualization Studio, using Gaia DR2 data from ESA/Gaia/DPAC. Star positions are adapted from the <a href="https://github.com/astronexus/HYG-Database">HYG Database</a> by David Nash / Astronexus under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </details>
+  </footer>
+</body>
+</html>
