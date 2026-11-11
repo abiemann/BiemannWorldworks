@@ -1,0 +1,10 @@
+QR Code generator library (compiled from TypeScript)
+Copyright (c) Project Nayuki. MIT License.
+
+Official project: https://www.nayuki.io/page/qr-code-generator-library
+Source file: https://www.nayuki.io/res/qr-code-generator-library/qrcodegen.js
+
+The library is vendored without modification. Its complete MIT license and
+copyright notice remain at the beginning of qrcodegen.js. See provenance.json
+for the exact source-file hash. The encoder runs locally in the browser and
+does not use a remote QR-code service.

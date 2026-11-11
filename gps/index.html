@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131c">
+  <meta name="description" content="Make a private location QR code on your phone, then scan it in Velvet Sky to see the stars for that place.">
+  <title>Your location · Velvet Sky · Biemann Worldworks</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./location.css">
+  <meta name="referrer" content="no-referrer">
+  <script src="../visits.js" defer></script>
+  <script src="./vendor/qrcodegen.js" defer></script>
+  <script src="./location.js" defer></script>
+</head>
+<body data-visit-page="location">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../">Biemann Worldworks</a>
+    <nav aria-label="Main navigation"><a href="../">Velvet Sky</a><a href="../privacy/">Privacy</a></nav>
+  </header>
+
+  <main id="main" class="location-page inner">
+    <div class="location-intro">
+      <p class="eyebrow">Velvet Sky · Your sky, your place</p>
+      <h1>Bring your sky with you.</h1>
+      <p>Make a location QR code on your phone, then scan it in Velvet Sky. Your coordinates stay on this page until you choose to share the code.</p>
+    </div>
+
+    <div class="location-workspace">
+      <form id="location-form" class="location-form" novalidate>
+        <div class="field">
+          <label for="location-name">Name this place</label>
+          <input id="location-name" type="text" maxlength="64" autocomplete="off" placeholder="My stargazing spot" aria-describedby="name-help name-error">
+          <p id="name-help" class="field-help">Up to 64 characters. This name appears in Velvet Sky.</p>
+          <p id="name-error" class="field-error" hidden></p>
+        </div>
+
+        <div class="find-location">
+          <button id="use-location" class="button button-secondary" type="button">Use my location</button>
+          <p class="field-help">Your browser asks for permission when you press this button.</p>
+          <p id="location-status" class="status" role="status" aria-live="polite"></p>
+          <p id="location-accuracy" class="accuracy" hidden></p>
+        </div>
+
+        <details id="manual-coordinates" class="manual-coordinates">
+          <summary>Or enter coordinates yourself</summary>
+          <p class="field-help">Use decimal degrees from a map. North and east are positive; south and west are negative.</p>
+          <div class="coordinate-fields">
+            <div class="field">
+              <label for="latitude">Latitude</label>
+              <input id="latitude" type="text" inputmode="decimal" autocomplete="off" placeholder="47.6062" aria-describedby="latitude-error">
+              <p id="latitude-error" class="field-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="longitude">Longitude</label>
+              <input id="longitude" type="text" inputmode="decimal" autocomplete="off" placeholder="-122.3321" aria-describedby="longitude-error">
+              <p id="longitude-error" class="field-error" hidden></p>
+            </div>
+          </div>
+        </details>
+
+        <button class="button button-primary" type="submit">Generate QR code <span aria-hidden="true">↗</span></button>
+        <p class="privacy-note">QR codes are generated on your device. Your name and coordinates are not uploaded or saved by this tool.</p>
+        <noscript><p class="field-error">Please enable JavaScript to generate a location QR code. The code is created entirely in your browser.</p></noscript>
+      </form>
+
+      <section class="qr-panel" aria-labelledby="qr-heading">
+        <div class="qr-panel-heading"><p class="eyebrow">Ready for your headset</p><h2 id="qr-heading">Your location code</h2></div>
+        <div id="qr-empty" class="qr-empty"><span class="qr-empty-mark" aria-hidden="true">✦</span><p>Name a place and choose its coordinates.<br>Your QR code will appear here.</p></div>
+        <div id="qr-result" hidden>
+          <p id="result-name" class="result-name"></p>
+          <div id="qr-wrap" class="qr-wrap"><canvas id="qr-canvas" role="img" aria-label="Location QR code"></canvas></div>
+          <p class="scan-instructions">In Velvet Sky, press <strong>A</strong>, open <strong>Location → Enter GPS</strong>, choose <strong>Scan QR</strong>, then look at this code. Review the details and choose <strong>Save</strong>.</p>
+          <button id="download-qr" class="button button-secondary" type="button">Download QR image</button>
+          <details class="payload-details"><summary>View the text inside this code</summary><label class="visually-hidden" for="qr-payload">Location QR payload</label><textarea id="qr-payload" readonly rows="4" spellcheck="false"></textarea><p class="field-help">The code contains this place name and coordinates. Keep it for yourself or share it with someone who needs this location.</p></details>
+        </div>
+        <p id="qr-status" class="status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="../">Biemann Worldworks</a>
+    <a href="../privacy/">Velvet Sky privacy policy</a>
+    <a href="mailto:alexbiemannandroidapps@gmail.com">Email support</a>
+  </footer>
+</body>
+</html>

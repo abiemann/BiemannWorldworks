@@ -1,0 +1,10 @@
+{
+  "source": "https://www.nayuki.io/res/qr-code-generator-library/qrcodegen.js",
+  "project": "https://www.nayuki.io/page/qr-code-generator-library",
+  "retrievedUtc": "2026-11-11T21:44:39.979005+00:00",
+  "sha256": "2511bc17f40a3c41d4a0578995db956b38997334d3d20113a5d4dc5c49c69480",
+  "bytes": 45350,
+  "license": "MIT",
+  "copyright": "Copyright (c) Project Nayuki",
+  "modifications": "None. Exact downloaded bytes preserved by gps/vendor/.gitattributes."
+}
