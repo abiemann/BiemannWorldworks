@@ -12,6 +12,8 @@ The free is.gd shortcut redirects directly to the generator, with detailed stati
 
 QR generation runs locally using the bundled [Nayuki library and license](gps/vendor/NOTICE.txt). Names/coordinates are not uploaded, added to URLs, or saved by the page. Downloading explicitly creates a location-bearing PNG. Anyone with the QR can read its location.
 
+To check statistics, bookmark [https://is.gd/stats.php?url=vtsky](https://is.gd/stats.php?url=vtsky). **No account, username or password is needed.** The report is public and free to view.
+
 Version 1 payload is plain text: `DV=1&LAT=47.6062095&LON=-122.3320708&Name=Seattle+balcony`. There are exactly four case-sensitive fields; names and values use UTF-8 form encoding. Only finite in-range coordinates and trimmed single-line names of 1–64 UTF-16 characters are accepted, matching the app. The generator clears a stale code whenever its inputs change. Geolocation is requested only from the button, times out after 15 seconds and offers retry/manual entry on errors.
 
 ## Publishing
