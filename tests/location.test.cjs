@@ -9,7 +9,6 @@ const vm = require("node:vm");
 const site = path.resolve(__dirname, "..");
 const source = fs.readFileSync(path.join(site, "gps/location.js"), "utf8");
 const vendor = fs.readFileSync(path.join(site, "gps/vendor/qrcodegen.js"), "utf8");
-const visits = fs.readFileSync(path.join(site, "visits.js"), "utf8");
 
 function page(options = {}) {
   const elements = new Map();
@@ -156,35 +155,4 @@ test("failed or disabled JavaScript cannot submit named inputs into a navigation
   const controls = html.match(/<(?:input|textarea|select)\b[^>]*>/gi) || [];
   assert.ok(controls.length >= 3);
   for (const control of controls) assert.doesNotMatch(control, /\bname\s*=/i);
-});
-
-function count(options = {}) {
-  const calls = [];
-  vm.runInNewContext(visits, {
-    location: { hostname: options.host || "abiemann.github.io", pathname: options.path || "/BiemannWorldworks/gps/", search: "?Name=Never-send-this&LAT=11" },
-    navigator: { doNotTrack: options.dnt, globalPrivacyControl: options.gpc },
-    document: { body: { dataset: { visitPage: options.page || "location" } } },
-    AbortSignal: { timeout: () => ({}) },
-    fetch: (url, init) => { calls.push({ url, init }); return Promise.resolve(); }
-  });
-  return calls;
-}
-
-test("aggregate counts use only two fixed production routes and omit page/form data", () => {
-  for (const [page, suffix] of [["home", "BiemannWorldworks"], ["location", "BiemannWorldworks/gps"]]) {
-    const calls = count({ page }); assert.equal(calls.length, 1);
-    assert.equal(calls[0].url, "https://hits.sh/abiemann.github.io/" + suffix + ".svg");
-    assert.equal(calls[0].init.credentials, "omit");
-    assert.equal(calls[0].init.referrerPolicy, "no-referrer");
-    assert.equal(calls[0].init.cache, "no-store");
-    assert.equal(calls[0].init.body, undefined);
-    assert.equal(calls[0].init.headers, undefined);
-    assert.doesNotMatch(JSON.stringify(calls), /Never-send-this|LAT=|Name=/);
-  }
-});
-
-test("counting skips local/unrecognized pages and respects DNT and GPC", () => {
-  for (const options of [{ host: "localhost" }, { host: "example.com" }, { path: "/other/" }, { page: "gps-form-value" }, { dnt: "1" }, { gpc: true }]) {
-    assert.equal(count(options).length, 0);
-  }
 });

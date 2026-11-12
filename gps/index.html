@@ -9,11 +9,10 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="./location.css">
   <meta name="referrer" content="no-referrer">
-  <script src="../visits.js" defer></script>
   <script src="./vendor/qrcodegen.js" defer></script>
   <script src="./location.js" defer></script>
 </head>
-<body data-visit-page="location">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="../">Biemann Worldworks</a>
@@ -22,9 +21,9 @@
 
   <main id="main" class="location-page inner">
     <div class="location-intro">
-      <p class="eyebrow">Velvet Sky · Your sky, your place</p>
-      <h1>Bring your sky with you.</h1>
-      <p>Make a location QR code on your phone, then scan it in Velvet Sky. Your coordinates stay on this page until you choose to share the code.</p>
+      <h1>Velvet Sky</h1>
+      <p>Create a QR code here, then scan it in Velvet Sky.</p>
+      <p class="location-privacy"><strong>Your coordinates stay on this page until you choose to share the code.</strong></p>
     </div>
 
     <div class="location-workspace">
@@ -72,7 +71,7 @@
           <p id="result-name" class="result-name"></p>
           <div id="qr-wrap" class="qr-wrap"><canvas id="qr-canvas" role="img" aria-label="Location QR code"></canvas></div>
           <p class="scan-instructions">In Velvet Sky, press <strong>A</strong>, open <strong>Location → Enter GPS</strong>, choose <strong>Scan QR</strong>, then look at this code. Review the details and choose <strong>Save</strong>.</p>
-          <button id="download-qr" class="button button-secondary" type="button">Download QR image</button>
+          <button id="download-qr" class="button button-secondary" type="button">Download QR image, to share</button>
           <details class="payload-details"><summary>View the text inside this code</summary><label class="visually-hidden" for="qr-payload">Location QR payload</label><textarea id="qr-payload" readonly rows="4" spellcheck="false"></textarea><p class="field-help">The code contains this place name and coordinates. Keep it for yourself or share it with someone who needs this location.</p></details>
         </div>
         <p id="qr-status" class="status" role="status" aria-live="polite"></p>

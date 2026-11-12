@@ -1,7 +1,8 @@
 .location-page { padding-block: clamp(2.5rem, 6vw, 5.5rem); max-width: 87rem; }
 .location-intro { max-width: 47rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
-.location-intro h1 { font-size: clamp(2.8rem, 5.7vw, 5.25rem); line-height: 1.04; letter-spacing: -.055em; margin: .22em 0 .28em; }
-.location-intro > p:last-child { color: var(--secondary); max-width: 43rem; font-size: 1.06rem; }
+.location-intro h1 { font-size: clamp(2.8rem, 5.7vw, 5.25rem); font-weight: 700; line-height: 1.04; letter-spacing: -.055em; margin: .22em 0 .28em; }
+.location-intro > p { color: var(--secondary); max-width: 43rem; font-size: 1.06rem; }
+.location-intro > .location-privacy { font-size: .88rem; }
 .location-workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
 .location-form, .qr-panel { min-width: 0; }
 .location-form { display: grid; gap: 1.55rem; }
