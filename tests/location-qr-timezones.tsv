@@ -1,0 +1,6 @@
+name	latitude	longitude	timeZone	payload
+Seattle balcony	47.6062095	-122.3320708	America/Los_Angeles	DV=1&LAT=47.6062095&LON=-122.3320708&Name=Seattle+balcony&TZ=America%2FLos_Angeles
+Café 星	-33.86785	151.20732	Australia/Sydney	DV=1&LAT=-33.86785&LON=151.20732&Name=Caf%C3%A9+%E6%98%9F&TZ=Australia%2FSydney
+Auckland	-36.84853	174.76349	Pacific/Auckland	DV=1&LAT=-36.84853&LON=174.76349&Name=Auckland&TZ=Pacific%2FAuckland
+Kathmandu	27.70169	85.3206	Asia/Kathmandu	DV=1&LAT=27.70169&LON=85.3206&Name=Kathmandu&TZ=Asia%2FKathmandu
+UTC reference	1.25	-2.5	UTC	DV=1&LAT=1.25&LON=-2.5&Name=UTC+reference&TZ=UTC

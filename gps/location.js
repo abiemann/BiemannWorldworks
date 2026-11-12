@@ -24,24 +24,38 @@
     return Number.isFinite(number) && Math.abs(number) <= limit ? number : null;
   }
 
+  function timeZone(value) {
+    const zone = String(value == null ? "" : value).trim();
+    if (zone !== "UTC" && !/^[A-Za-z_]+(?:\/[A-Za-z0-9_+.-]+)+$/.test(zone)) return null;
+    try { new Intl.DateTimeFormat("en", { timeZone: zone }); return zone; }
+    catch (_) { return null; }
+  }
+
+  function deviceTimeZone() {
+    try { return timeZone(Intl.DateTimeFormat().resolvedOptions().timeZone) || "UTC"; }
+    catch (_) { return "UTC"; }
+  }
+
   function validate(draft) {
     const name = String(draft.name == null ? "" : draft.name).trim();
     const latitude = coordinate(draft.latitude, 90);
     const longitude = coordinate(draft.longitude, 180);
+    const zone = timeZone(draft.timeZone == null ? deviceTimeZone() : draft.timeZone);
     const errors = {};
     if (!name) errors.name = "Give this place a name.";
     else if (name.length > MAX_NAME_LENGTH) errors.name = "Use a name with 64 characters or fewer.";
     else if (CONTROL.test(name) || !validUnicode(name)) errors.name = "Use a single-line place name with valid text.";
     if (latitude === null) errors.latitude = "Enter latitude between -90 and 90.";
     if (longitude === null) errors.longitude = "Enter longitude between -180 and 180.";
-    return Object.keys(errors).length ? { value: null, errors: errors } : { value: { name: name, latitude: latitude, longitude: longitude }, errors: errors };
+    if (zone === null) errors.zone = "Choose a valid region time zone, such as America/Los_Angeles.";
+    return Object.keys(errors).length ? { value: null, errors: errors } : { value: { name: name, latitude: latitude, longitude: longitude, timeZone: zone }, errors: errors };
   }
 
   function encode(draft) {
     const result = validate(draft);
     if (!result.value) throw new Error("A valid named location is required.");
     const value = result.value;
-    const payload = new URLSearchParams({ DV: "1", LAT: String(value.latitude), LON: String(value.longitude), Name: value.name }).toString();
+    const payload = new URLSearchParams({ DV: "1", LAT: String(value.latitude), LON: String(value.longitude), Name: value.name, TZ: value.timeZone }).toString();
     if (payload.length > MAX_PAYLOAD_LENGTH) throw new Error("This location code is too long.");
     return payload;
   }
@@ -52,7 +66,7 @@
   if (typeof document === "undefined") return;
 
   const form = document.getElementById("location-form");
-  const fields = { name: document.getElementById("location-name"), latitude: document.getElementById("latitude"), longitude: document.getElementById("longitude") };
+  const fields = { name: document.getElementById("location-name"), latitude: document.getElementById("latitude"), longitude: document.getElementById("longitude"), zone: document.getElementById("time-zone") };
   const locate = document.getElementById("use-location");
   const locationStatus = document.getElementById("location-status");
   const accuracy = document.getElementById("location-accuracy");
@@ -63,6 +77,15 @@
   const canvas = document.getElementById("qr-canvas");
   let qr = null;
   let request = 0;
+  fields.zone.value = deviceTimeZone();
+  const choices = document.getElementById("time-zones");
+  const zones = new Set(["UTC", fields.zone.value]);
+  if (typeof Intl.supportedValuesOf === "function") {
+    Intl.supportedValuesOf("timeZone").forEach(function (zone) { zones.add(zone); });
+  }
+  Array.from(zones).sort().forEach(function (zone) {
+    const option = document.createElement("option"); option.value = zone; choices.appendChild(option);
+  });
 
   function clearError(key) {
     const message = document.getElementById(key + "-error");
@@ -83,7 +106,7 @@
     fields[key].addEventListener("input", function () {
       clearError(key);
       invalidate();
-      if (key !== "name") {
+      if (key === "latitude" || key === "longitude") {
         request++;
         locate.disabled = false;
         locate.textContent = "Use my location";
@@ -164,7 +187,7 @@
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    const checked = validate({ name: fields.name.value, latitude: fields.latitude.value, longitude: fields.longitude.value });
+    const checked = validate({ name: fields.name.value, latitude: fields.latitude.value, longitude: fields.longitude.value, timeZone: fields.zone.value });
     Object.keys(fields).forEach(clearError);
     invalidate();
     if (!checked.value) {
@@ -182,6 +205,7 @@
       const payload = encode(checked.value);
       qr = qrcodegen.QrCode.encodeText(payload, qrcodegen.QrCode.Ecc.MEDIUM);
       fields.name.value = checked.value.name;
+      fields.zone.value = checked.value.timeZone;
       document.getElementById("result-name").textContent = checked.value.name;
       document.getElementById("qr-payload").value = payload;
       canvas.setAttribute("aria-label", "Location QR code for " + checked.value.name);

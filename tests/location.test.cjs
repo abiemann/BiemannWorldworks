@@ -19,6 +19,7 @@ function page(options = {}) {
       this.value = ""; this.textContent = ""; this.hidden = false;
       this.disabled = false; this.open = false; this.style = {};
       this.attrs = {}; this.events = {}; this.clientWidth = 280;
+      this.children = [];
     }
     addEventListener(name, callback) { this.events[name] = callback; }
     removeAttribute(name) { delete this.attrs[name]; }
@@ -28,6 +29,7 @@ function page(options = {}) {
     getContext() { return { fillRect() {}, imageSmoothingEnabled: true }; }
     toDataURL(type) { assert.equal(type, "image/png"); return "data:image/png;base64,unit-test-png"; }
     click() { this.clicked = true; }
+    appendChild(child) { this.children.push(child); }
   }
   const get = id => { if (!elements.has(id)) elements.set(id, new Element()); return elements.get(id); };
   const navigator = {};
@@ -38,7 +40,10 @@ function page(options = {}) {
     URLSearchParams, navigator, isSecureContext: options.secure !== false, devicePixelRatio: 2,
     document: {
       getElementById: get,
-      createElement(tag) { assert.equal(tag, "a"); const anchor = new Element(); anchors.push(anchor); return anchor; }
+      createElement(tag) {
+        assert.ok(tag === "a" || tag === "option");
+        const element = new Element(); if (tag === "a") anchors.push(element); return element;
+      }
     },
     addEventListener() {}
   };
@@ -60,7 +65,9 @@ test("five shared browser/app fixtures preserve UTF-8 names, punctuation and sig
   assert.equal(lines.length, 5);
   for (const line of lines) {
     const [name, latitude, longitude, payload] = line.split("\t");
-    assert.equal(protocol.encode({ name, latitude, longitude }), payload);
+    const encoded = protocol.encode({ name, latitude, longitude });
+    assert.equal(encoded.split("&TZ=")[0], payload);
+    assert.ok(new URLSearchParams(encoded).get("TZ"));
     assert.equal(new URLSearchParams(payload).get("Name"), name);
   }
 });
@@ -155,4 +162,39 @@ test("failed or disabled JavaScript cannot submit named inputs into a navigation
   const controls = html.match(/<(?:input|textarea|select)\b[^>]*>/gi) || [];
   assert.ok(controls.length >= 3);
   for (const control of controls) assert.doesNotMatch(control, /\bname\s*=/i);
+});
+
+test("time-zone fixtures share the exact encoded IANA identifier with the app", () => {
+  const { protocol } = page();
+  const lines = fs.readFileSync(path.join(__dirname, "location-qr-timezones.tsv"), "utf8").trimEnd().split(/\r?\n/).slice(1);
+  assert.equal(lines.length, 5);
+  for (const line of lines) {
+    const [name, latitude, longitude, timeZone, payload] = line.split("\t");
+    assert.equal(protocol.encode({ name, latitude, longitude, timeZone }), payload);
+    assert.equal(new URLSearchParams(payload).get("TZ"), timeZone);
+  }
+});
+
+test("a visible device-zone default is selectable and changing it clears the prior QR", () => {
+  const p = page();
+  assert.ok(p.get("time-zone").value);
+  assert.ok(p.get("time-zones").children.length > 1);
+  p.fill(); p.get("time-zone").value = "Pacific/Auckland";
+  p.get("location-form").fire("submit");
+  assert.equal(new URLSearchParams(p.get("qr-payload").value).get("TZ"), "Pacific/Auckland");
+  p.get("time-zone").value = "America/Los_Angeles"; p.get("time-zone").fire("input");
+  assert.equal(p.get("qr-result").hidden, true);
+  assert.equal(p.get("qr-payload").value, "");
+  p.get("location-form").fire("submit");
+  assert.equal(new URLSearchParams(p.get("qr-payload").value).get("TZ"), "America/Los_Angeles");
+});
+
+test("invalid or abbreviated zones stay inline and cannot generate a misleading QR", () => {
+  for (const zone of ["", "PST", "Mars/Olympus", "+01:00", "America/Los_Angeles\nInvalid"]) {
+    const p = page(); p.fill(); p.get("time-zone").value = zone;
+    p.get("location-form").fire("submit");
+    assert.equal(p.get("qr-result").hidden, true);
+    assert.equal(p.get("time-zone").attrs["aria-invalid"], "true");
+    assert.match(p.get("zone-error").textContent, /time zone/);
+  }
 });
