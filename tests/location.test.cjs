@@ -97,7 +97,7 @@ test("permission denied, unavailable and timeout offer manual entry and a workin
     const retry = p.get("use-location").fire("click");
     p.pending[1].success({ coords: { latitude: 0, longitude: 0, accuracy: 25 } }); await retry;
     assert.equal(p.get("latitude").value, "0");
-    assert.match(p.get("location-status").textContent, /Location found/);
+    assert.equal(p.get("location-status").textContent, "Received Location -> Click 'Generate QR code'");
   }
 });
 

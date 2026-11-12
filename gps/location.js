@@ -120,7 +120,7 @@
       clearError("latitude");
       clearError("longitude");
       invalidate();
-      locationStatus.textContent = "Location found. Name this place, then generate your code.";
+      locationStatus.textContent = "Received Location -> Click 'Generate QR code'";
       if (Number.isFinite(position.coords.accuracy) && position.coords.accuracy >= 0) {
         accuracy.textContent = "Reported accuracy: approximately " + Math.ceil(position.coords.accuracy).toLocaleString() + " metres.";
         accuracy.hidden = false;

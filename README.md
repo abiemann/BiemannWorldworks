@@ -6,7 +6,9 @@ GitHub Pages serves the static site from the root of the main branch. To preview
 
 ## Location QR generator
 
-[abiemann.github.io/BiemannWorldworks/gps/](https://abiemann.github.io/BiemannWorldworks/gps/) is the shortest route in this existing GitHub Pages project. A custom shorter domain can be added later. Name the place, press **Use my location** and grant permission, or enter signed decimal coordinates manually. Desktop browsers may give coarse estimates; reported accuracy is displayed. Press **Generate QR code** and scan the result in Velvet Sky's **A → Location → Enter GPS → Scan QR**. Scanning fills the form for review; **Save** applies it. A phone and laptop both work, and optical scanning needs no shared Wi-Fi network.
+Use the memorable [is.gd/velvetsky](https://is.gd/velvetsky) shortcut, or the direct [abiemann.github.io/BiemannWorldworks/gps/](https://abiemann.github.io/BiemannWorldworks/gps/) address. Name the place, press **Use my location** and grant permission, or enter signed decimal coordinates manually. Desktop browsers may give coarse estimates; reported accuracy is displayed. Press **Generate QR code** and scan the result in Velvet Sky's **A → Location → Enter GPS → Scan QR**. Scanning fills the form for review; **Save** applies it. A phone and laptop both work, and optical scanning needs no shared Wi-Fi network.
+
+The is.gd alias redirects directly to the generator. Optional detailed redirect statistics were left off when creating it. Opening it contacts is.gd under [its privacy policy](https://is.gd/privacy.php); no name or coordinates appear in the shortcut. Its target cannot be changed later, so retain the stable GitHub route and direct link as a fallback.
 
 QR generation runs locally using the bundled [Nayuki library and license](gps/vendor/NOTICE.txt). Names/coordinates are not uploaded, added to URLs, or saved by the page. Downloading explicitly creates a location-bearing PNG. Anyone with the QR can read its location.
 
