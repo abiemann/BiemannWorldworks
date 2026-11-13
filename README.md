@@ -4,7 +4,7 @@ The public [Biemann Worldworks website](https://abiemann.github.io/BiemannWorldw
 
 The November 13, 2026 policy update matches the current A-button menu: observing places come from Cities, manual GPS or a QR scan, with no headset device-location request. It describes the locally stored place name, coordinates, time zone and preferences, optional local-only camera scanning, and deletion through the headset's app-data controls or uninstall. It retains the confirmed support/deletion contact, GitHub hosting disclosure and separate optional is.gd statistics disclosure. The policy URL above is the address to enter in Meta's Privacy Policy field; GitHub Pages publishes the revision from the main branch.
 
-The owner confirmed a **Mixed Ages** intended audience, including children aged 10–12 and teens/adults. The policy describes this 10+ audience and parent/guardian help for the optional website and support contact. This wording does not implement Meta's age-category checks or parental-consent features. Dashboard age-group self-certification, the IARC questionnaire, and the required mixed-age Get Age Category API integration with its applicable Data Use Checkup and platform setup are still pending. Review the policy again when that SDK processing is implemented. See [Meta's mixed-age requirements](https://developers.meta.com/vr/documentation/spatial-sdk/ps-requirements/) and [age-group guidance](https://developers.meta.com/vr/resources/age-groups/).
+The owner confirmed a **Mixed Ages** intended audience, including children aged 10–12 and teens/adults. The policy describes this 10+ audience and parent/guardian help for the optional website and support contact. It also describes the app's new Meta Platform SDK checks for store/channel ownership and broad account age category, kept only in session memory without logging or storage. The same stargazing features remain available if age is unavailable; Meta's platform service handles its own account/network processing. The dashboard requires a User ID permission prerequisite for the Age Group API, but the app does not retrieve, display, log or save an identifier and does not request a profile. This wording does not grant platform access or implement parental-consent features. IARC ratings and the owner-confirmed Mixed Ages declaration are saved; data-use approval and store-channel runtime acceptance remain open. See [Meta's mixed-age requirements](https://developers.meta.com/vr/documentation/spatial-sdk/ps-requirements/) and [age-group guidance](https://developers.meta.com/vr/resources/age-groups/).
 
 GitHub Pages serves the static site from the root of the main branch. To preview locally, serve this directory with any static HTTP server and open the home page. Use the links in the page footer to review the privacy policy and sky imagery credits.
 
@@ -24,7 +24,7 @@ Version 1 payload is plain text: `DV=1&LAT=47.6062095&LON=-122.3320708&Name=Seat
 
 ## Publishing
 
-The website has no added page-visit counter. The app itself remains offline and has no analytics service. Deployment requires committing/pushing this repository's changes to main; changes in the VelvetSky app repository do not publish this website.
+The website has no added page-visit counter. Stargazing remains offline and the app has no developer analytics service; Meta account checks are separate platform-service processing. Deployment requires committing/pushing this repository's changes to main; changes in the VelvetSky app repository do not publish this website.
 
 ## Checks
 
